@@ -1,8 +1,12 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Category from 'App/Models/Category'
+import Product from 'App/Models/Product'
 
 export default class HomeController {
   public async index({ view }: HttpContextContract) {
-    return view.render('home')
+    const products = await Product.all()
+    const categories = await Category.all()
+    return view.render('home', { products, categories })
   }
 
   public async create({}: HttpContextContract) {}

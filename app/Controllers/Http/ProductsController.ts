@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Category from 'App/Models/Category'
 import Product from 'App/Models/Product'
+import AWS from 'aws-sdk'
 
 export default class ProductsController {
   public async index({ view }: HttpContextContract) {
@@ -10,12 +11,17 @@ export default class ProductsController {
 
   public async create({ view }: HttpContextContract) {
     const categories = await Category.all()
-    console.log(categories)
     return view.render('products/create', { categories })
   }
 
   public async store({ request, response, auth }: HttpContextContract) {
-    const data = request.only(['name', 'description', 'photo', 'price'])
+    //AWS.config.update({ region: 'sa-east-1' })
+    // request.multipart.onFile('input_field_name', {}, (part) => {
+    //   someSdk.uploadStream(part)
+    // })
+    //await request.multipart.process()
+
+    const data = request.only(['name', 'description', 'price', 'categoriesId', 'photo'])
     const user = auth.user
     await user?.related('products').create(data)
     return response.redirect().toRoute('root')
