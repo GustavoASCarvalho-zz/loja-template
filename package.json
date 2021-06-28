@@ -28,6 +28,7 @@
   "dependencies": {
     "@adonisjs/auth": "^8.0.6",
     "@adonisjs/core": "^5.1.8",
+    "@adonisjs/drive": "^1.0.4",
     "@adonisjs/lucid": "^15.0.1",
     "@adonisjs/repl": "^3.1.4",
     "@adonisjs/session": "^6.0.6",

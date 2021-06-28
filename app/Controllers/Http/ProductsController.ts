@@ -1,7 +1,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Drive from '@adonisjs/drive'
 import Category from 'App/Models/Category'
 import Product from 'App/Models/Product'
-//import AWS from 'aws-sdk'
+import File from 'App/Models/File'
 
 export default class ProductsController {
   public async index({ view }: HttpContextContract) {
@@ -15,12 +16,6 @@ export default class ProductsController {
   }
 
   public async store({ request, response, auth }: HttpContextContract) {
-    //AWS.config.update({ region: 'sa-east-1' })
-    // request.multipart.onFile('photo', {}, (part) => {})
-    // await request.multipart.process()
-    // const file = request.input('input_field_name')
-    // console.log(file)
-    /////////////////////////////qqq
     const data = request.only(['name', 'description', 'price', 'categoriesId', 'photo'])
     const user = auth.user
     await user?.related('products').create(data)
