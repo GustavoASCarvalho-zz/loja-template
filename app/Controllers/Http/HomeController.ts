@@ -3,9 +3,11 @@ import Category from 'App/Models/Category'
 import Product from 'App/Models/Product'
 
 export default class HomeController {
-  public async index({ view }: HttpContextContract) {
+  public async index({ view, response, request }: HttpContextContract) {
     const products = await Product.all()
     const categories = await Category.all()
+    console.log(request)
+
     return view.render('home', { products, categories })
   }
 
