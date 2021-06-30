@@ -6,7 +6,8 @@ export default class Files extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('user_id').notNullable().references('id').inTable('users')
+      table.integer('product_id').nullable().references('id').inTable('products')
+      table.integer('user_id').nullable().references('id').inTable('users')
       table.string('name').notNullable()
       table.string('key').notNullable()
       table.string('url').notNullable()

@@ -6,7 +6,7 @@ export default class File extends BaseModel {
   public id: number
 
   @column()
-  public userId: number
+  public productId: number
 
   @column()
   public name: string

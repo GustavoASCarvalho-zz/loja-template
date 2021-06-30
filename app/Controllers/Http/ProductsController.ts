@@ -16,9 +16,25 @@ export default class ProductsController {
   }
 
   public async store({ request, response, auth }: HttpContextContract) {
-    const data = request.only(['name', 'description', 'price', 'categoriesId', 'photo'])
+    const data = request.only(['name', 'description', 'price', 'categoriesId'])
     const user = auth.user
-    await user?.related('products').create(data)
+
+    request.multipart.onFile('photo', {}, async (file) => {
+      try {
+        const contentType = file.headers['content-type']
+        const acl = 'public-read'
+        const key = `${(Math.random() * 100).toString(32)}-${file.filename}`
+
+        const photo = await Drive.put(key, file, {
+          contentType,
+          acl,
+        })
+        console.log(data)
+
+        await user?.related('products').create(data)
+      } catch (error) {}
+    })
+
     return response.redirect().toRoute('root')
   }
 
