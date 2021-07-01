@@ -1,8 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Drive from '@adonisjs/drive'
 import Category from 'App/Models/Category'
 import Product from 'App/Models/Product'
-import File from 'App/Models/File'
 
 export default class ProductsController {
   public async index({ view }: HttpContextContract) {
@@ -21,15 +19,8 @@ export default class ProductsController {
 
     request.multipart.onFile('photo', {}, async (file) => {
       try {
-        const contentType = file.headers['content-type']
-        const acl = 'public-read'
-        const key = `${(Math.random() * 100).toString(32)}-${file.filename}`
-
-        const photo = await Drive.put(key, file, {
-          contentType,
-          acl,
-        })
-        console.log(data)
+        file.headers['content-type']
+        console.log(file)
 
         await user?.related('products').create(data)
       } catch (error) {}
