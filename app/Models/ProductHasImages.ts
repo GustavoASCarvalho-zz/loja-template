@@ -3,7 +3,7 @@ import { BaseModel, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import Category from './Category'
 
-export default class Product extends BaseModel {
+export default class ProductsHasImages extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -11,7 +11,7 @@ export default class Product extends BaseModel {
   public imagesId: number
 
   @column()
-  public products: number
+  public productId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

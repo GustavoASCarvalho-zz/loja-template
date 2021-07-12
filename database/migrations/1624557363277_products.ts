@@ -11,7 +11,7 @@ export default class Products extends BaseSchema {
       table.string('name').notNullable()
       table.string('description').notNullable()
       table.double('initial_price').notNullable()
-      table.double('price').notNullable()
+      table.double('price').nullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

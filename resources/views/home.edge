@@ -16,22 +16,21 @@
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 @each(product in products)
                 <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Category badge-->
-                        
-                        {{--  @each(category in categories)
-                            @if(category.productId == product.id)
-                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ category.title}}</div>    
-                            @endif
-                        @endeach  --}}
+                    <div class="card h-100">                       
                         
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{product.photo}}"/>
+                        <img class="card-img-top" src="/uploads/ckr12ain50002uwv63kdq41m0.png"/>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">{{product.name}}</h5>
+                                <hr>
+                                @each(category in categories)
+                                    @if(category.id == product.categoriesId)
+                                        <span>{{category.title}}</span> 
+                                    @endif
+                                @endeach
                                 <hr>
                                 <span>{{product.description}}</span>
                                 <hr>
@@ -44,7 +43,7 @@
                                     <div class="bi-star-fill"></div>
                                 </div>  --}}
                                 <!-- Product price-->
-                                <span>R${{product.price}}</span>
+                                <span>R${{product.initialPrice}}</span>
                             </div>
                         </div>
                         <!-- Product actions-->

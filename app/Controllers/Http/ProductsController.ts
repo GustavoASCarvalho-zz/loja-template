@@ -2,7 +2,9 @@ import Application from '@ioc:Adonis/Core/Application'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { cuid } from '@poppinss/utils/build/helpers'
 import Category from 'App/Models/Category'
+import Image from 'App/Models/Image'
 import Product from 'App/Models/Product'
+import ProductsHasImages from 'App/Models/ProductHasImages'
 
 export default class ProductsController {
   public async index({ view }: HttpContextContract) {
@@ -16,20 +18,22 @@ export default class ProductsController {
   }
 
   public async store({ request, response, auth }: HttpContextContract) {
-    const data = request.only(['name', 'description', 'price', 'categoriesId'])
+    const data = request.only(['name', 'description', 'initialPrice', 'categoriesId'])
     const user = auth.user
-    const image = request.file('photo', {
+    const file = request.file('photo', {
       size: '2mb',
       extnames: ['jpg', 'png', 'jpeg'],
     })
 
-    const filename = `${cuid()}.${image?.extname}`
+    const filename = `${cuid()}.${file?.extname}`
 
-    if (image) {
-      await image.move(Application.tmpPath('uploads'), { name: filename })
+    if (file) {
+      await file.move(Application.tmpPath('uploads'), { name: filename })
     }
 
-    user?.related('products').create(data)
+    const image = await Image.create({ url: filename })
+    const product = await user?.related('products').create(data)
+    ProductsHasImages.create({ imagesId: image.id, productId: product?.id })
 
     return response.redirect().toRoute('root')
   }
