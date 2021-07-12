@@ -1,15 +1,13 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Files extends BaseSchema {
-  protected tableName = 'files'
+export default class ProductsHasImages extends BaseSchema {
+  protected tableName = 'products_has_images'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('name').notNullable()
-      table.string('key').notNullable()
-      table.string('url').notNullable()
-      table.string('content_type').notNullable()
+      table.integer('product_id').notNullable().references('id').inTable('products')
+      table.integer('images_id').notNullable().references('id').inTable('images')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

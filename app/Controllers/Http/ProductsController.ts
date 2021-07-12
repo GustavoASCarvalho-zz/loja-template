@@ -1,5 +1,6 @@
 import Application from '@ioc:Adonis/Core/Application'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { cuid } from '@poppinss/utils/build/helpers'
 import Category from 'App/Models/Category'
 import Product from 'App/Models/Product'
 
@@ -22,7 +23,13 @@ export default class ProductsController {
       extnames: ['jpg', 'png', 'jpeg'],
     })
 
-    if (image) await image.move(Application.tmpPath('uploads'))
+    const filename = `${cuid()}.${image?.extname}`
+
+    if (image) {
+      await image.move(Application.tmpPath('uploads'), { name: filename })
+    }
+
+    user?.related('products').create(data)
 
     return response.redirect().toRoute('root')
   }
