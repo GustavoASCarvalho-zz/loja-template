@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Files extends BaseSchema {
-  protected tableName = 'files'
+export default class Images extends BaseSchema {
+  protected tableName = 'images'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
