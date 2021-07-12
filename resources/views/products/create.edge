@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form class="mt-5 row" method="post" action="{{ route('products.store') }}">
+    <form class="mt-5 row" method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
         <div class="col-6">
             <h1 class="text-center">Dados</h1>
             <div class="form-floating mb-3">
@@ -13,18 +13,11 @@
                 <input type="text" class="form-control" id="description" name="description" placeholder="descrição">
                 <label for="description" class="form-label">Descrição do produto</label>
             </div>
-    
-    
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="photo" name="photo" placeholder="descrição">
-                <label for="photo" class="form-label">Foto do produto</label>
-            </div>
             
-            {{--  <div class="mb-3">
+            <div class="mb-3">
                 <label for="photo" class="form-label">Foto do produto</label>
                 <input class="form-control" type="file" accept="image/png, image/gif, image/jpeg" id="photo" name="photo">
-            </div>  --}}
-    
+            </div>
     
             <div class="mb-3">
                 <select class="form-select" aria-label="Default select example" name="categoriesId">   

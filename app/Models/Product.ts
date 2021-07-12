@@ -20,9 +20,6 @@ export default class Product extends BaseModel {
   public description: string
 
   @column()
-  public photo: string
-
-  @column()
   public price: number
 
   @column.dateTime({ autoCreate: true })

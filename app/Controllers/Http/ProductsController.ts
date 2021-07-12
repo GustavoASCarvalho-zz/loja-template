@@ -1,3 +1,4 @@
+import Application from '@ioc:Adonis/Core/Application'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Category from 'App/Models/Category'
 import Product from 'App/Models/Product'
@@ -16,15 +17,12 @@ export default class ProductsController {
   public async store({ request, response, auth }: HttpContextContract) {
     const data = request.only(['name', 'description', 'price', 'categoriesId'])
     const user = auth.user
-
-    request.multipart.onFile('photo', {}, async (file) => {
-      try {
-        file.headers['content-type']
-        console.log(file)
-
-        await user?.related('products').create(data)
-      } catch (error) {}
+    const image = request.file('photo', {
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg'],
     })
+
+    if (image) await image.move(Application.tmpPath('uploads'))
 
     return response.redirect().toRoute('root')
   }
