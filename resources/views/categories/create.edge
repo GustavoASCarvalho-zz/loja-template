@@ -4,15 +4,18 @@
 @layout('layout')
 
 @section('content')
-<form class="mt-5" method="post" action="{{ route('category.store') }}">
-    <div class="col-12">
-        <h1 class="text-center">Dados</h1>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="title" name="title" placeholder="title">
-            <label for="title">Titulo da nova categoria</label>
+<div class="container">
+    <form class="mt-5" method="post" action="{{ route('category.store') }}">
+        <div class="col-12">
+            <h1 class="text-center">Dados</h1>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="title" name="title" placeholder="title">
+                <label for="title">Titulo da nova categoria</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
         </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </div>
-</form>
+    </form>
+</div>
+
 @endsection
 @endsection

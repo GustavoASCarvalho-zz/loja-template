@@ -8,19 +8,13 @@
                 @each(product in products)
                 <div id="card" class="col mb-5">
                     <div class="card h-100">
-                        <!-- Lixo badge-->
-                        
-                        <div id="trash" class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                            <a class="btn btn-danger text-white">
-                                <span class="text-white">
-                                    <i class="bi bi-trash">
-                                    </i>
-                                </span>
-                            </a>
-                        </div>    
-                        
+
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{product.photo}}"/>
+                        @each(image in productImage)
+                          @if(product.id == image.productId)
+                            <img class="card-img-top" src="{{image.image}}"/>
+                          @endif
+                        @endeach
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
