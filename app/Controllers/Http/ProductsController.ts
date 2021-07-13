@@ -28,7 +28,7 @@ export default class ProductsController {
     const filename = `${cuid()}.${file?.extname}`
 
     if (file) {
-      await file.move(Application.tmpPath('uploads'), { name: filename })
+      await file.move(Application.publicPath('images'), { name: filename })
     }
 
     const image = await Image.create({ url: filename })

@@ -19,7 +19,11 @@
                     <div class="card h-100">                       
                         
                         <!-- Product image-->
-                        <img class="card-img-top" src="/uploads/ckr12ain50002uwv63kdq41m0.png"/>
+                        @each(image in productImage)
+                          @if(product.id == image.productId)
+                            <img class="card-img-top" src="{{image.image}}"/>
+                          @endif
+                        @endeach
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
